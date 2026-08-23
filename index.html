@@ -2289,8 +2289,8 @@
       height: 100px;
       border-radius: 50%;
       background: var(--bg-white);
-      box-shadow: 
-        -2px -2px 6px rgba(255, 255, 255, 0.9), 
+      box-shadow:
+        -2px -2px 6px rgba(255, 255, 255, 0.9),
         2px 2px 8px rgba(66, 54, 46, 0.1),
         inset 0 0 10px rgba(194, 155, 56, 0.05);
       border: 1px solid rgba(194, 155, 56, 0.15);
@@ -2364,6 +2364,22 @@
       border-color: var(--text-primary);
       box-shadow: 0 10px 25px rgba(26, 20, 18, 0.15);
       transform: translateY(-2px);
+    }
+
+    .cover-bottom-logo-wrap {
+      margin-top: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .cover-bottom-logo {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      opacity: 0.85;
     }
 
     /* 2. SPECTACULAR PHOTO HERO */
@@ -2937,9 +2953,20 @@
     }
 
     .stationery-card {
-      max-width: 650px;
-      margin: 0 auto;
+      background: var(--bg-white);
+      border: 1px solid rgba(194, 155, 56, 0.22);
+      box-shadow: var(--shadow-card);
+      padding: 50px 40px;
+      border-radius: 4px;
       text-align: center;
+      width: 100%;
+      box-sizing: border-box;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .stationery-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-luxe);
     }
 
     .stationery-eyebrow {
@@ -3030,32 +3057,55 @@
 
     .stationery-details-wrap {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 1fr 1fr;
       gap: 60px;
-      align-items: center;
-      max-width: 1100px;
+      align-items: start;
+      max-width: 1150px;
       margin: 0 auto;
     }
 
-    .stationery-venue-photo-wrap {
-      position: relative;
+    .venue-inline-photo-wrap {
       width: 100%;
-      height: 540px;
+      height: 220px;
       overflow: hidden;
-      border: 1px solid rgba(66, 54, 46, 0.08);
-      box-shadow: 0 10px 30px rgba(26, 20, 18, 0.06);
+      border-radius: 4px;
+      border: 1px solid rgba(194, 155, 56, 0.15);
+      margin-bottom: 25px;
     }
 
-    .stationery-venue-photo {
+    .venue-inline-photo {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 25%;
-      transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+      object-position: center 30%;
+      transition: transform 1.2s ease;
     }
 
-    .stationery-venue-photo-wrap:hover .stationery-venue-photo {
-      transform: scale(1.05);
+    .venue-inline-photo-wrap:hover .venue-inline-photo {
+      transform: scale(1.04);
+    }
+
+    .venue-map-wrap {
+      width: 100%;
+      height: 220px;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(194, 155, 56, 0.2);
+      margin-top: 25px;
+      margin-bottom: 10px;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .venue-map-iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: sepia(0.35) contrast(1.05) saturate(0.85);
+      transition: filter 0.5s ease;
+    }
+
+    .venue-map-iframe:hover {
+      filter: sepia(0.05) contrast(1.05) saturate(1.0);
     }
 
     @media (max-width: 991px) {
@@ -3064,11 +3114,9 @@
         gap: 40px;
       }
 
-      .stationery-venue-photo-wrap {
-        height: auto;
-        aspect-ratio: 4 / 5;
+      .stationery-card {
+        padding: 40px 20px;
         max-width: 550px;
-        margin: 0 auto;
       }
     }
 
@@ -3726,9 +3774,11 @@
     <div class="cover-content">
       <div class="cover-logo-circle">
         <svg viewBox="0 0 100 100" width="80" height="80">
-          <circle cx="50" cy="50" r="43" stroke="#DBBE7E" stroke-width="1" fill="none" stroke-dasharray="3, 2" opacity="0.8" />
+          <circle cx="50" cy="50" r="43" stroke="#DBBE7E" stroke-width="1" fill="none" stroke-dasharray="3, 2"
+            opacity="0.8" />
           <circle cx="50" cy="50" r="38" stroke="#C29B38" stroke-width="1.5" fill="none" />
-          <text x="50" y="59" font-family="'Pinyon Script', cursive" font-size="34" fill="#C29B38" text-anchor="middle">K&amp;R</text>
+          <text x="47" y="59" font-family="'Pinyon Script', cursive" font-size="32" fill="#C29B38"
+            text-anchor="middle">K&amp;R</text>
         </svg>
       </div>
       <div class="cover-pretitle">THE WEDDING CELEBRATION OF</div>
@@ -3737,6 +3787,9 @@
       <div class="cover-gold-line"></div>
       <div class="cover-venue">SUMMER PLACE · JOHANNESBURG</div>
       <button id="btn-open-invitation" class="cover-btn">OPEN OUR INVITATION</button>
+      <div class="cover-bottom-logo-wrap">
+        <img src="wedding_logo.png" alt="Kayshree &amp; Rukesh Logo" class="cover-bottom-logo">
+      </div>
     </div>
   </div>
 
@@ -3804,7 +3857,7 @@
           <circle cx="50" cy="50" r="43" stroke="#DBBE7E" stroke-width="1" fill="none" stroke-dasharray="3, 2"
             opacity="0.8" />
           <circle cx="50" cy="50" r="38" stroke="#C29B38" stroke-width="1.5" fill="none" />
-          <text x="50" y="59" font-family="'Pinyon Script', cursive" font-size="34" fill="#FFFFFF"
+          <text x="47" y="59" font-family="'Pinyon Script', cursive" font-size="32" fill="#FFFFFF"
             text-anchor="middle">K&amp;R</text>
         </svg>
       </div>
@@ -3833,7 +3886,7 @@
         <div class="travel-text-slide">
           <div class="travel-slide-content">
             <div class="travel-mobile-image-wrap">
-              <img src="image_9.jpg" alt="Our First Meet" class="travel-mobile-img travel-img-1">
+              <img src="image_3.JPG" alt="Our First Meet" class="travel-mobile-img travel-img-1">
             </div>
             <span class="chapter-num">CHAPTER ONE</span>
             <h2 class="chapter-main-title">It Started With<br>A Sunday Afternoon.</h2>
@@ -3848,7 +3901,7 @@
         <div class="travel-text-slide">
           <div class="travel-slide-content">
             <div class="travel-mobile-image-wrap">
-              <img src="image_2.JPG" alt="Our Journey Together" class="travel-mobile-img travel-img-2">
+              <img src="Picture5.jpg" alt="Our Journey Together" class="travel-mobile-img travel-img-2">
             </div>
             <span class="chapter-num">CHAPTER TWO</span>
             <h2 class="chapter-main-title">Around the World<br>&amp; Best Friends.</h2>
@@ -3925,7 +3978,7 @@
 
         <!-- Image for Journey Together -->
         <div class="story-chapter-img-showcase">
-          <img src="Picture5.jpg" alt="Kayshree & Rukesh - Our Journey Together">
+          <img src="image_4.JPG" alt="Kayshree & Rukesh - Our Journey Together">
         </div>
 
         <p class="story-chapter-p">Whether we're dancing around the house, singing songs we only know half the words to,
